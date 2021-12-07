@@ -138,25 +138,38 @@ app.post('/register', (req, res)=>{
     conn().end();
 });
 
-app.get('/member.delete', checkMemberSignedIn, (req, res)=>{
+
+app.get('/member.delete', (req, res)=>{
+    res.render('member-delete');
+});
+app.post('/member.delete', checkMemberSignedIn, (req, res)=>{
     let id = req.session.member.ID;
     let sql1 = `DELETE FROM memberfriendlist WHERE Member1 = ${id} OR Member2 = ${id};`;
     let sql2 = `DELETE FROM reservation WHERE BookedBy = ${id};`;
     let sql3 = `DELETE FROM member WHERE ID = ${id};`;
 
     conn().connect();
-    conn().query(sql1, err => {
-        if(err) throw err;
+    conn().query(sql1, (err) => {
+        if(err) {
+            res.redirect('/')
+            throw err;}
+        else{
+            conn().query(sql2, (err) => {
+                if(err) {
+                    res.redirect('/');
+                    throw err;}
+                else{
+                    conn().query(sql3, (err) => {
+                        if(err) {
+                            res.redirect('/');
+                            throw err;}
+                        res.redirect('/');
+                    });
+                }
+            });
+        }
     });
     
-    conn().query(sql2, err => {
-        if(err) throw err;
-    });
-    
-    conn().query(sql3, err => {
-        if(err) throw err;
-        res.redirect('login');
-    });
     conn().end();
 });
 
@@ -336,7 +349,7 @@ app.post('/create-reservation', checkMemberSignedIn, (req, res) => {
     let sql = "INSERT INTO reservation VALUES ('"+startTime+"', '"+bookedBy+"', '"+facName+"', '"+endTime+"');";
     conn().query(sql, (err)=>{
         if(err) throw err;
-        res.render('view-res');
+        res.redirect('/view-reservation');
     });
     conn().end();
     updateAmountOwed(bookedBy, facName);
@@ -483,7 +496,7 @@ function getResDetails(r){
 
     }
     let finalDT = `${y}-${mNum}-${d} ${time}`;
-
+    //console.log(fName+'_'+ finalDT);
     return [fName, finalDT];
 }
 
@@ -521,17 +534,48 @@ app.get('/view-friends', checkMemberSignedIn, (req,res)=>{
     conn().connect();
     let userId = req.session.member.ID;// 8 is just temporary for now will remove soon
     let sql = `SELECT * FROM memberfriendlist mf JOIN member m ON mf.Member2 = m.ID WHERE Member1 = ${userId} OR mf.Member2 = ${userId};`;
-    // let sql3 = `SELECT * FROM memberfriendlist mf JOIN member m ON mf.Member1 = m.ID WHERE Member2 = ${userId};`;
-    conn().query(sql, (err, friends) => {
+
+    let sql5 = `SELECT  m.ID, m.MemberName as M1Name, m2.ID, m2.MemberName as M2Name, Member1, Member2 FROM Memberfriendlist mf join member m ON mf.Member1 = m.ID  
+    join member m2 ON mf.Member2 = m2.ID WHERE Member1 = ${userId} OR member2 = ${userId};`;
+    let friends;
+    
+    conn().query(sql5, (err, d) => {
         if(err) throw err;
+        
+        if (d.length < 1){
+            
+            friends.push('No Friends Added.');
+            //console.log(friends);
+            res.end(res.redirect('/portal'));
+        }else{
+        let friends = getFriends(d, req.session.member);
+
         let sql2 = "SELECT m.MemberName, mf.Member2, date(r.StartTime) as ReservationDate FROM memberfriendlist mf JOIN reservation r ON mf.Member2 = r.BookedBy JOIN member m ON m.ID = mf.Member2 WHERE Member1 = '"+userId+"' AND date(r.StartTime) IN (SELECT date(StartTime) FROM reservation WHERE BookedBy = '"+userId+"')"
         conn().query(sql2, (err, mutualReservations) => {
-            console.log(mutualReservations)
+            //console.log(mutualReservations)
             res.render('viewfriends', {friends: friends, mutualReservations: mutualReservations})
         });
+        }
     });
     conn().end();
 });
+
+function getFriends(d, id){
+    //console.log(d);
+    let n = id.MemberName;
+    let t = [];
+    d.forEach(dat =>{
+        if (dat.M1Name == n){
+            t.push(dat.M2Name);
+        }
+        if (dat.M2Name == n){
+            t.push(dat.M1Name);
+        }
+    });
+    //console.log(t);
+    return t;
+}
+
 
 // redirected from the Member Home Portal
 app.get('/member-account-info', checkMemberSignedIn, (req,res)=>{
