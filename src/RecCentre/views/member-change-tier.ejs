@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = 'main.css'>
+    <title>Change Tier| Burrito Boys Rec Centre</title>
+</head>
+
+
+<body id = 'all'>
+
+    <div id = 'inside'>
+        <h1>Change Membership Tier</h1>
+        <br>
+        <h2>Your current tier: <%= currentTier %></h2>
+        
+        
+
+        <form method = 'POST' action = '/change-membership'>
+            <select name="newTier">
+                <option value=1>Tier 1</option>
+                <option value=2>Tier 2</option>
+                <option value=3>Tier 3</option>
+            </select>
+            <input type="submit" value="Change">
+        </form>
+        <a href = '/portal'>Back to Portal</a>
+    </div>
+        
+       
+
+
+
+</body>
+
+</html>

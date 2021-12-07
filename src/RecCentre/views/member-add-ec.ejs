@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = 'main.css'>
+    <title>Add Contact | Burrito Boys Rec Centre</title>
+</head>
+
+
+<body id = 'all'>
+
+    <div id = 'inside'>
+        <h1>Add Emergency Contact</h1>
+
+        <form method = 'post' action = '/add-emergency-contact'>
+            <label for='name'>Name:</label>
+            <input type = 'text' id ='name' name = 'eName' required>
+            <label for='addy'>Address:</label>
+            <input type = 'text' id ='addy' name = 'eAddy' required>
+            <label for='phone'>Phone Number:</label>
+            <input type = 'text' id ='phone' name = 'ePhone' required>
+            <label for='relation'>Relation:</label>
+            <input type = 'text' id ='relation' name = 'eRel' required><br><br>
+            <input type = 'submit' name = 'submitEC' value = 'Add Contact'>
+        </form>
+        <a href = '/portal'>Back to Portal</a>
+    </div>
+        
+       
+
+
+
+</body>
+
+</html>

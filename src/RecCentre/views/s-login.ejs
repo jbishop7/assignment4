@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = 'main.css'>
+    <title>Staff Login | Burrito Boys Rec Centre</title>
+</head>
+
+
+<body id = 'all'>
+
+    <div id = 'inside'>
+        <h1>Staff Login</h1>
+        
+        <form method = 'POST' action = '/login-staff'>
+            <label for = 'empID'>Employee ID: </label>
+            <input type = 'text' name = 'id' id = 'empID' placeholder = 'Enter ID' required>
+            <br><br>
+            <label for = 'ps'>Password: </label>
+            <input type = 'password' id = 'ps' name = 'password'>
+            <br><br>
+            <input type = 'submit' value = 'Login'>
+        </form>
+        <% if(locals.error) { %>
+            <%= error %>
+        <% } %>
+    
+    
+    </div>
+        
+       
+
+
+
+</body>
+
+</html>

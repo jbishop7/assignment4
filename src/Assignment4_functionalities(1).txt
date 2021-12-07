@@ -1,0 +1,83 @@
+1. SELECT * 
+   FROM reccentre.memberfriendlist;
+
+2. SELECT * 
+   FROM memberfriendlist mf JOIN member m ON mf.Member2 = m.ID 
+   WHERE Member1 = 8;
+
+3. SELECT mf.Member2, date(r.StartTime) as ReservationDate 
+   FROM memberfriendlist mf JOIN reservation r ON mf.Member2 = r.BookedBy 
+   WHERE Member1 = 8 AND date(r.StartTime) IN (SELECT date(StartTime) FROM reservation WHERE BookedBy = 8)
+
+4. INSERT QUERY->
+
+   INSERT INTO `reccentre`.`staff` (`StaffName`, `Address`, `Phone`, `EmployeeID`, `Age`, `Gender`, `Salary`, `ManagerID`) 
+   VALUES ('Name Here', 'Address Here', '000000', '6', '28', 'M', '8888', '1062');
+   INSERT INTO `reccentre`.`employeeschedule` (`EmployeeID`, `FacName`, `StartTime`, `EndTime`) 
+   VALUES ('6', 'Bad Birdies', '2021-11-30 08:00:01', '2021-11-30 08:00:01');
+
+   REMOVE QUERY->
+
+   DELETE FROM employeeschedule 
+   WHERE EmployeeID = 2; 
+   DELETE FROM staff 
+   WHERE EmployeeID =2;
+
+
+5. SELECT * FROM reservation 
+   WHERE StartTime = '2020-05-11 21:07:00'; 
+
+   # If returns 0 num of rows
+   INSERT INTO reservation 
+   VALUES ('2020-05-11 21:07:00', '2', 'London Courts', 300, '2020-05-12 01:07:00');
+
+   # If returns greater than 0 num of rows
+   INSERT INTO reservation 
+   VALUES (date_add('2020-05-11 21:07:00', INTERVAL 15 second), '2', 'London Courts', 300, date_add('2020-05-12 01:07:00', INTERVAL 15 second));
+
+
+6. SELECT * 
+   FROM reservation 
+   WHERE BookedBy = 8 AND EndTime < now();
+
+7. DELETE FROM memberfriendlist WHERE Member1 = 2 OR Member2 = 2;
+   DELETE FROM reservation WHERE BookedBy = 2;
+   DELETE FROM member WHERE ID = 2;
+
+8. Add subscriptions during sign up:
+   INSERT INTO `reccentre`.`member` (`ID`, `MemberName`, `Address`, `Phone`, `Email`, `Age`, `Gender`, `MembershipTier`) 
+   VALUES ('1003', 'Name Here', 'Address Here', '0000', 'a@b.c', '12', 'M', '2');
+
+   Update subscriptions:
+   UPDATE member SET MembershipTier = 2 
+   WHERE ID = 1002;
+
+
+Complex functionalities:
+
+1. SELECT m.ID, m.MemberName, m.MembershipTier, sum(f.Cost) as AmountOwed 
+   FROM member m JOIN reservation r ON m.ID = r.BookedBy JOIN facility f ON f.FacName = r.FacName GROUP BY m.ID;
+
+
+2. SELECT mf.Member1, mf.Member2, m.MemberName, r.StartTime 
+   FROM memberfriendlist mf JOIN reservation r ON mf.Member2 = r.BookedBy JOIN member m ON mf.Member2 = m.ID 
+   WHERE mf.Member1 = 8 AND date(r.StartTime) > '2021-02-20' AND date(r.StartTime) < '2021-02-27';
+
+
+3. SELECT * 
+   FROM reservation 
+   WHERE BookedBy = 8 and EndTime BETWEEN date_sub(now(), INTERVAL 7 day) and now();
+
+4. 
+   SELECT m.Gender, m.MembershipTier, count(m.ID) as ReservationCount 
+   FROM reservation r JOIN member m ON r.BookedBy = m.ID  
+   GROUP BY m.MembershipTier, m.Gender 
+   ORDER BY m.MembershipTier;
+
+
+
+# of F and M in each tier
+   SELECT Gender, MembershipTier, COUNT(ID) as MemberCount 
+   FROM member 
+   GROUP BY MembershipTier, Gender 
+   ORDER BY MembershipTier;

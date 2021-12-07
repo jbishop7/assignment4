@@ -1,0 +1,5 @@
+<form method = 'get' action = '/register'>
+      <input type = 'submit' value = 'Sign Up' name = 'register'>
+    </form>
+
+    

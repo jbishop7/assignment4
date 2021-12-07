@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Burrito Boys Rec Centre</title>
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #474e5d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-color: white;
+}
+
+/* input fields */
+input[type=text], input[type=number] {
+  width: 60%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.custom-select{
+    width: 60%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+label, input {
+  display: block; 
+}
+
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #5104aa;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+
+</style>
+</head>
+<body>
+
+<form action="/register" method="post">
+    <div class="container">
+        <h1>Membership Registration </h1>
+        <p>Complete the form below to sign up for our memebership service</p>
+        <hr>
+    
+        <label for="name"><b>Name</b></label>
+        <table width="60%" cellpadding="0" cellspacing="0"> 
+        <tr>
+            <td><label for="First_Name">First Name:</label></td>
+            <td><input name="first_name" id="First_Name" type="text" placeholder="First Name" required /></td>
+            <td><label for="last_name">Last Name:</label></td>
+            <td><input name="last_name" id="Last_Name" type="text" placeholder="Last Name" required/></td> 
+        </tr> 
+        
+        <tr>
+            <td><label for="Age"><b>Age</b></label></td>
+            <td><input name="age" id="Age" type="number" placeholder="Enter your age"></td>
+        </tr>
+
+        <tr>
+            <td><label for="gender"><b>Gender</b></label></td>
+            <td><input type="radio" name="gender" value="male">Male
+                <input type="radio" name="gender" value="female">Female
+                <input type="radio" name="gender" value="other">Other
+                
+            </td>
+        </tr>
+       
+        </table> 
+        
+        <label for="phNum"><b>Phone Number</b></label>
+        <input type="text" placeholder="Enter Phone Number" name="phNum" id="phNum" required>
+
+        <label for="email"><b>Email Address</b></label>
+        <input type="text" placeholder="Enter Email" name="email" id="email" required>
+    
+        <label for="address"><b>Address</b></label>
+        <input type="text" placeholder="Enter address" name="addr" id="addr" required>
+
+    <hr>
+
+        <h3>Emergency Contact</h3>
+    <hr>
+        <label for="name"><b>Name</b></label>
+        <table width="60%" cellpadding="0" cellspacing="0"> 
+            <tr>
+                <td><label for="First_Name">First Name:</label></td>
+                <td><input name="first_name" id="First_Name" type="text" placeholder="First Name" required/></td>
+                <td><label for="last_name">Last Name:</label></td>
+                <td><input name="last_name" id="Last_Name" type="text" placeholder="Last Name" required/></td> 
+            </tr> 
+        </table> 
+
+        <label for="phNum"><b>Phone Number</b></label>
+        <input type="text" placeholder="Enter Phone Number" name="phNum" id="phNum" required>
+    
+        <label for="address"><b>Address</b></label>
+        <input type="text" placeholder="Enter address" name="addr" id="addr" required>
+
+        <label for="relationToMem"><b>Relation to member</b></label>
+        <input type="text" placeholder="Enter relation to member" name="relationToMem" id="rel_Mem" required>
+        
+    <hr>
+
+    <button type="submit" class="registerbtn">Register</button>
+</div>
+  
+</form>
+
+</body>
+</html>

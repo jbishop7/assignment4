@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = 'main.css'>
+    <title>Member Portal | Burrito Boys Rec Centre</title>
+</head>
+
+
+<body id = 'all'>
+
+    <div id = 'inside'>
+        <h1>Your Reservations</h1>
+        <p>Dynamically create a table with results from backend.</p>
+
+        <table border="1" style="padding: 5px">
+            <tr>
+                <th>Start Date/Time</th>
+                <th>End Date/Time</th>
+                <th>Facility</th>
+            </tr>
+            <% reservations.forEach(Reservation=> {%>     
+            <tr>
+                <td><%= Reservation.StartTime %></td>
+                <td><%= Reservation.EndTime %></td>
+                <td><%= Reservation.FacName %></td>
+            </tr>
+            <% }) %>
+        </table>
+        
+        
+        <a href = '/portal'>Back to Portal</a>
+    </div>
+        
+       
+
+
+
+</body>
+
+</html>

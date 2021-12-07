@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "mysql": "^2.18.1"
+  },
+  "name": "reccentre",
+  "version": "1.0.0",
+  "description": "rec centre site for 3309 database course",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbishop7/3309_Final.git"
+  },
+  "author": "Jacob Bishop",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbishop7/3309_Final/issues"
+  },
+  "homepage": "https://github.com/jbishop7/3309_Final#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

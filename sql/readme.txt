@@ -1,0 +1,1 @@
+This SQL file will define and fill the database with data. 

@@ -1,0 +1,25 @@
+conn().query(sql1, (e,d,f)=>{
+        if (e){
+            throw e;
+        }
+        if (d[0].ID == null){
+            res.end(res.redirect('/portal'));
+        }
+        owedFromRes = d[0].AmountOwed;
+        let t = d[0].MembershipTier;
+
+        conn().query(`SELECT Cost, discount from Membership Where tier = ${t}`, (e,data,f)=>{
+            
+            if (data = []){
+                
+            }else{
+            console.log(data);
+            membershipFlat = data[0].Cost;
+            disc = data[0].discount;
+            total = (disc*owedFromRes)+membershipFlat;
+            res.render('member-view-billing', {total: total});
+            }
+            
+            
+        });
+    });

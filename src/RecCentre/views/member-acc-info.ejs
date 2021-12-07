@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = 'main.css'>
+    <title>Account Info | Burrito Boys Rec Centre</title>
+</head>
+
+
+<body id = 'all'>
+
+    <div id = 'inside'>
+        <h1>Account Info</h1>
+        
+        <ul>
+            <li><a href = '/change-membership'>Change Membership Tier</a></li>
+            <li><a href = '/check-savings'>Check Savings With Other Tiers</a></li>
+            
+        </ul>
+    
+        <ul>
+            <li><a href = '/view-billing'>View Billing</a></li>
+        </ul>
+
+        <ul>
+            <li><a href = '/add-emergency-contact'>Add Emergency Contact</a></li>
+            <li><a href = '/delete-emergency-contact'>Remove Emergency Contact</a></li>
+        </ul>
+        <ul>
+            <li><a href = "#" onclick="confirmDelete()">Delete Account</a></li>
+        </ul>
+        <a href = '/portal'>Back to Portal</a>
+    </div>
+    <script>
+        function confirmDelete() {
+            var ask = confirm("Do you want to delete your account?");
+
+            if(ask) {
+                window.location = "/member.delete";
+            }
+        }
+    </script>
+        
+       
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,273 @@
+const { response } = require('express');
+const express = require ('express');
+const conn = require('./DBConn.js');
+const app = express();
+var path = require('path');
+
+app.use(express.static('views'));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(
+    express.urlencoded({
+      extended: true
+    })
+  )
+
+//app.use(require('body-parser').urlencoded({extended: false}));
+app.use(express.json());
+
+//index / homepage 
+app.get('/', (req, res) => {
+    //this is our index page....
+    res.render('index');
+});
+
+
+//MEMBERS ONLY METHODS
+
+//login for members - redirected from index
+app.get('/login', (req, res) => {
+    res.render('m-login')
+});
+
+//handle when they submit the login form
+app.post('/login', (req, res)=>{
+    //do stuff here i guess idk... this is when we actually logged in. do we store the session somehow?
+})
+
+//register for new members- redirected from index
+app.get('/register', (req, res)=>{
+    //console.log(req.body); returns nothing bc its a get
+    res.render('register');
+});
+
+//handle when they submit their registration.
+app.post('/register', (req, res)=>{
+    //add new user to sql
+});
+
+//redirected from login. Brings us to home of member page
+app.post('/member-portal', (req, res)=>{
+    console.log(req.body.mID);  //need to handle login info.
+    //store the USERID based on their email.
+
+    res.end(res.render('member-portal'));
+    //res.render('member-portal');
+});
+
+
+app.get('/member.delete', (req, res)=>{
+    //ask if they ACTUAALLY want to delete? something like that. Might need another route, or we can just get no confirmation. I don't care.
+    
+    let results;
+
+    //sql statemtn get facname, cost from facility
+    results = resultsFromSQL
+
+    res.render('member-delete', {result:results});
+});
+
+
+app.post('/register-success', (req, res)=>{
+    //need to handle registration details. Then need to redirect them to a new page
+    console.log(req.body);
+    res.end(res.render('member-portal'));
+    
+});
+
+// redirected from MemberAccountInfo
+app.get('/check-savings',(req,res)=>{
+
+});
+
+// redirected from MemberAccountInfo
+app.get('/view-billing',(req,res)=>{
+    //grab amount owed from sql
+    res.render('member-view-billing');
+});
+
+// redirected from MemberAccountInfo
+app.get('/change-membership',(req, res)=>{
+    //AYO we need another route i think for the post from this
+    res.render('member-change-tier');
+});
+
+app.post('change-membership', (req, res)=>{
+    //handle the change. SQL 
+});
+
+app.post('/change-tier-confirm',(req, res)=>{
+    //do some magic, update SQL 
+    res.render('member-portal');
+})
+
+// redirected from MemberAccountInfo
+app.get('/add-emergency-contact', (req,res)=>{
+    res.render('member-add-ec');
+});
+
+app.post('/add-emergency-contact', (req,res)=>{
+    //ok so that worked and is all good and cool.
+    //we can do some data and then send us back to the member portal?
+    console.log(req.body);
+    res.send('this is from a post wow it worked');
+});
+
+// redirected from MemberAccountInfo
+app.get('/delete-emergency-contact', (req,res)=>{
+    res.render('member-del-ec');
+});
+
+app.post('/delete-emergency-contact', (req,res)=>{
+    //delete the SHIT from SQL
+});
+
+// redirected from Member Home Portal
+app.get('/create-reservation', (req,res)=>{
+    res.render('create-res');
+});
+
+// Handle when create reservation form is submitted
+app.post('/create-reservation', (req,res)=>{
+    console.log(req.body);
+})
+
+// redirected from Member Home Portal
+app.get('/view-reservations', (req,res)=>{
+    res.render('view-res');
+});
+
+// redirected from Member Home Portal
+app.get('/cancel-reservation', (req,res)=>{
+    res.render('cancel-res');
+});
+
+app.post('/cancel-reservation', (req,res)=>{
+    //handle .. SQL
+});
+
+// redirected from Member Home Portal
+app.get('/add-friend', (req,res)=>{
+
+    res.render('addfriend');
+});
+
+app.post('/friend-added', (req, res)=>{
+    console.log(req.body);
+    res.send('Hello there');    //do something else..
+});
+
+// redirected from Member Home Portal
+app.get('/view-friends', (req,res)=>{
+    //gonna need to do some SQL stuff here. Grab all friends
+    //and grab the friends upcoming reservations. Then need to display them
+    res.render('viewfriends');
+});
+
+// redirected from the Member Home Portal
+app.get('/member-account-info', (req,res)=>{
+    res.render('member-acc-info');
+});
+
+
+/////////////////////////////////////////////////////////////
+//Logout can be used by all users. We will just clean up the session
+//and redirect to index page.
+app.get('/logout', (req,res)=>{ // bring it back to the sign in page and erase user session json file
+    //erase user session.
+    res.render('index');
+});
+///////////////////////////////////////////////////////////////
+
+
+
+//STAFF ONLY METHODS
+
+//login page for staff. Redirected from index
+app.get('/login-staff', (req, res)=>{
+    res.render('s-login');
+});
+
+app.post('/login-staff', (req, res)=>{
+    //IF REQ.BODY CONTAINS AN M, RES.RENDER(MANAGER-PORTAL)
+    //OTHERWISE GO TO STAFF PORTAL
+    let r = req.body;
+    console.log(r);
+    if (r.id.includes('M')){
+        res.render('manager-portal');
+    }else{
+    res.render('s-portal');
+    }
+});
+
+
+//redirected from staff login. brings us to staff page.
+app.get('/staff', (req, res)=>{
+    res.render('s-portal'); 
+});
+
+// redirected from staff portal
+app.get('/view-shift', (req, res)=>{
+    //do SQL magic to grab all shifts for that staff member
+    res.render('s-view-shift');
+});
+
+// redirected from staff portal
+app.get('/view-payment-details', (req, res)=>{
+    //do SQL magic once again, grab salary and shit
+    res.render('s-payment');
+});
+
+
+//MANAGERS
+//redirects to manager portal from LOGIN-STAFF
+app.get('/manager', (req, res)=>{
+    res.render('manager-portal');
+});
+
+// redirected from manager portal 
+app.get('/add-employee', (req, res)=>{
+    res.render('add-emp');
+});
+
+// redirected from manager portal 
+app.post('/add-employee', (req, res)=>{
+    res.render('add-emp');
+});
+
+// redirected from manager portal 
+app.get('/remove-employee', (req, res)=>{
+    res.render('manager-del-emp');
+});
+
+app.post('/remove-employee', (req, res)=>{
+    res.render('rem-emp-confirm');
+});
+
+// redirected from manager portal 
+app.get('/view-employees', (req, res)=>{
+        //need to send it an object w data from SQL
+    res.render('manager-view-emps');
+});
+
+// redirected from manager portal 
+app.get('/assign-employees-shifts', (req, res)=>{
+
+    res.render('manager-assign-emps');
+});
+
+app.post('/assign-employees-shifts', (req, res)=>{
+
+    console.log(req.body);
+});
+
+// redirected from manager portal
+app.get('/payment-details', (req,res)=>{
+    res.render('manager-pd');
+});
+
+
+
+app.listen(80);

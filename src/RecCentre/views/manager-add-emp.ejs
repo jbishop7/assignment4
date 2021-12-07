@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = 'main.css'>
+    <title>Remove Employee| Burrito Boys Rec Centre</title>
+</head>
+
+
+<body id = 'all'>
+
+    <div id = 'inside'>
+        <h1>Add a New Employee</h1>
+        <br>
+        
+        <form method = 'post' action = '/add-employee'>
+            
+            <label for = 'name'>Staff Name: </label>
+            <input type = 'text' name = 'name' maxlength="50" required>
+            <label for = 'addy'>Address: </label>
+            <input type = 'text' name = 'addy' maxlength="50" required>
+            <label for = 'phone'>Phone Number: </label>
+            <input type = 'text' name = 'phone' maxlength="11" required>
+            <label for = 'gender'>Gender:</label>
+            <input type = 'text' name = 'gender' value = 'M,F,N' required>
+            <label for = 'age'>Age:</label>
+            <input type = 'text' name = 'age' required>
+            <label for = 'salary'>Salary</label>
+            <input type = 'text' name = 'salary' required><br>
+            <input type = 'submit' value = 'Add Employee'>
+            <br>
+            
+
+        </form>
+        <a href = '/manager'>Back to Portal</a>
+    </div>
+        
+       
+
+
+
+</body>
+
+</html>

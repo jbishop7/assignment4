@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = 'main.css'>
+    <title>Select Report :: MAnager | Burrito Boys Rec Centre</title>
+</head>
+
+
+<body id = 'all'>
+
+    <div id = 'inside'>
+        <h1>Report 2: Member report based on gender and tier</h1>
+        <table border="1" style="border-collapse: collapse;">
+            <tr>
+                <th>Gender</th>
+                <th>Membership Tier</th>
+                <th>Member Count</th>
+            </tr>
+            <% data.forEach(d => { %>
+                <tr>
+                    <td><%= d.Gender %></td>
+                    <td><%= d.MembershipTier %></td>
+                    <td><%= d.MemberCount %></td>
+                </tr>
+            <% }) %>
+        </table>
+        <br>
+        <a href = '/manager'>Back to Portal</a>
+    </div>
+        
+       
+
+
+
+</body>
+
+</html>

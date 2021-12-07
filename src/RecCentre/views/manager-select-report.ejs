@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = 'main.css'>
+    <title>Select Report :: MAnager | Burrito Boys Rec Centre</title>
+</head>
+
+
+<body id = 'all'>
+
+    <div id = 'inside'>
+        <div class="static-reports">
+            <h1>View Reports</h1>
+            <ul>
+                <li><a href="/manager-report1">Member Reservation Report based on gender and tier</a></li>
+                <li><a href="/manager-report2">Member Report based on gender and tier</a></li>
+            </ul>
+        </div>
+        <h1>Create Report (Member Count)</h1>
+
+        <form method = 'get' action = '/manager-report3'>
+            <label for="gender">Gender</label>
+            <select name="gender" id="">
+                <option value="All">All</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="O">Other</option>
+            </select>
+            <br><br>
+            <label for="tier">Tier</label>
+            <select name="tier" id="">
+                <option value="All">All</option>
+                <option value="1">Tier 1</option>
+                <option value="2">Tier 2</option>
+                <option value="3">Tier 3</option>
+            </select>
+            <br><br>
+            <label for="age-g">Age Greater Than</label>
+            <input type="number" name="age_g" id="">
+            <br><br>
+            <label for="age-g">Age Less Than</label>
+            <input type="number" name="age_l" id="">
+            <br><br>
+
+            <input type = 'submit' value = 'Create Report'>
+        </form>
+        <br>
+        <a href = '/manager'>Back to Portal</a>
+    </div>
+        
+       
+
+
+
+</body>
+
+</html>

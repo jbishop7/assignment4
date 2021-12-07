@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = 'main.css'>
+    <title>New Reservation | Burrito Boys Rec Centre</title>
+</head>
+
+
+<body id = 'all'>
+
+    <div id = 'inside'>
+        <h1>Create New Reservation</h1>
+        <br>
+        
+        <form method = 'post' action = '/create-reservation'>
+            <label for='startTime'>Pick a Start Date and Time</label>
+            <input id = 'startTime' type = 'datetime-local' name = 'startdt' value='2020-01-01T01:23:00'>
+            <br>
+            <label for='endTime'>Pick an End Date and Time</label>
+            <input id = 'endTime' type = 'datetime-local' name = 'enddt' value='2020-01-01T01:23:00'>
+            <br>
+            <label for='facs'>Choose a Facility</label>
+            <select name="facName" id="facs">
+                <% FacNames.forEach(FacName => { %>
+                <option value="<%= FacName.FacName %>"><%= FacName.FacName %></option>
+                <% }) %>
+            </select>
+            <br>
+            
+            <input type="submit" value="Create Reservation">
+        </form>
+        <a href = '/portal'>Back to Portal</a>
+
+    </div>
+        
+       
+
+
+
+</body>
+
+</html>

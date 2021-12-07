@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = 'main.css'>
+    <title>New Reservation | Burrito Boys Rec Centre</title>
+</head>
+
+
+<body id = 'all'>
+
+    <div id = 'inside'>
+        <h1>View Friends</h1>
+        <br>
+        
+        <h1>Your Friends</h1>
+
+        <table border="1" style="padding: 5px">
+            <tr>
+                <th>Friend Name</th>
+            </tr>
+            <% friends.forEach(friend=> {%>     
+            <tr>
+                <td><%= friend.MemberName %></td>
+            </tr>
+            <% }) %>
+        </table>
+
+        <h1>Mutual Reservation</h1>
+        <br>
+        
+        <p>Upcoming reservations of friends on same day.</p>
+
+        <table border="1" style="padding: 5px">
+            <tr>
+                <th>Friend Name</th>
+                <th>Reservation Data</th>
+            </tr>
+            <% mutualReservations.forEach(mr=> {%>     
+            <tr>
+                <td><%= mr.MemberName %></td>
+                <td><%= mr.ReservationDate %></td>
+            </tr>
+            <% }) %>
+        </table>
+        <a href = '/portal'>Back to Portal</a>
+    </div>
+        
+       
+
+
+
+</body>
+
+</html>
